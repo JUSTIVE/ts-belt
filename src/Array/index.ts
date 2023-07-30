@@ -89,14 +89,11 @@ export declare function getUnsafe<A>(index: number): (xs: Array<A>) => A
 
 /** Returns `value` at the given index, or `undefined` if the given index is out of range. */
 
-export declare function getUndefined<A>(
-  xs: Array<A>,
-  index: number,
-): A | undefined
+export declare function getUndefined<A>(xs: Array<A>, index: number): Option<A>
 
 export declare function getUndefined<A>(
   index: number,
-): (xs: Array<A>) => A | undefined
+): (xs: Array<A>) => Option<A>
 
 /** Returns `Some(value)` for the first element in the array that satisifies the given predicate function, or `None` if no element satisifies the predicate. */
 
