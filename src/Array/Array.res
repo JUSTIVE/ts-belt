@@ -157,7 +157,7 @@ let initOrEmpty = xs =>
 @gentype
 let take = (xs, n) => {
   let l = length(xs)
-  let len = n < 0 ? 0 : l < n ? l : n
+  let len = n < 0 ? 0 : l < n ? 0 : n
   Belt.Array.slice(xs, ~offset=0, ~len)
 }
 
