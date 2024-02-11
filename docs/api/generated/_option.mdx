@@ -170,8 +170,8 @@ Returns `value` if `option` is `Some(value)`, otherwise, returns a default value
 
 
 ```ts
-function getWithDefault<A>(option: Option<A>, defaultValue: NonNullable<A>): A
-function getWithDefault<A>(defaultValue: NonNullable<A>): (option: Option<A>) => A
+function getWithDefault<A extends NonNullable<unknown>>(option: Option<A>, defaultValue: NoInfer<A>): A
+function getWithDefault<A extends NonNullable<unknown>>(defaultValue: NoInfer<A>): (option: Option<A>) => A
 ```
 
 ```ts

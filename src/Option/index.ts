@@ -108,13 +108,13 @@ export declare function filter<A>(
 
 /** Returns `value` if `option` is `Some(value)`, otherwise, returns a default value. */
 
-export declare function getWithDefault<A extends NonNullable<any>>(
+export declare function getWithDefault<A extends NonNullable<unknown>>(
   option: Option<A>,
-  defaultValue: A,
+  defaultValue: NoInfer<A>,
 ): A
 
-export declare function getWithDefault<A extends NonNullable<any>>(
-  defaultValue: A,
+export declare function getWithDefault<A extends NonNullable<unknown>>(
+  defaultValue: NoInfer<A>,
 ): (option: Option<A>) => A
 
 /** Returns `value` if `option` is `Some(value)`, otherwise, throws an exception. */

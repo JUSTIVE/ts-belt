@@ -64,9 +64,9 @@ export declare function toResult<A, B>(
   errorValue: B,
 ): Result<A, B>
 export declare function getExn<A>(option: Option<A>): A | never
-export declare function getWithDefault<A extends NonNullable<any>>(
+export declare function getWithDefault<A extends NonNullable<unknown>>(
   option: Option<A>,
-  defaultValue: A,
+  defaultValue: NoInfer<A>,
 ): A
 export declare function isNone<A>(option: Option<A>): option is None
 export declare function isSome<A>(option: Option<A>): option is Some<A>
