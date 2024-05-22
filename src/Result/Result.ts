@@ -67,7 +67,7 @@ export declare function match<A, B, R>(
   errorFn: (value: B) => R,
 ): R
 
-export declare function matchW<A,B,C,D>(
+export declare function bimap<A,B,C,D>(
   result: Result<A, B>,
   okFn: (value: A) => C,
   errorFn: (value: B) => D

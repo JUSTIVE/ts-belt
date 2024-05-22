@@ -110,7 +110,7 @@ let match = (result, okFn, errorFn) =>
   }
 
 @gentype
-let matchW = (result, okFn, errorFn) =>
+let bimap = (result, okFn, errorFn) =>
   switch result {
   | Ok(value) => okFn(value)
   | Error(value) => errorFn(value)
