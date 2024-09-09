@@ -30,10 +30,7 @@ D.deleteKeys({ name: 'Joe', location: 'Warsaw' }, []) // → {
 }
 D.deleteKeys({ name: 'Joe', location: 'Warsaw' }, ['name']) // → { location: 'Warsaw' }
 D.deleteKeys({ name: 'Joe', location: 'Warsaw' }, ['name', 'location']) // → {}
-pipe({ name: 'Joe', location: 'Warsaw' }, D.deleteKeys([])) // → {
-  name: 'Joe',
-  location: 'Warsaw',
-}
+pipe({ name: 'Joe', location: 'Warsaw' }, D.deleteKeys([])) // → { name: 'Joe', location: 'Warsaw' }
 pipe({ name: 'Joe', location: 'Warsaw' }, D.deleteKeys(['name'])) // → { location: 'Warsaw' }
 pipe(
   { name: 'Joe', location: 'Warsaw' },
@@ -117,8 +114,8 @@ Returns `Some(value)` if the given key exists, otherwise returns `None`.
 
 
 ```ts
-function get<T, K extends keyof T>(dict: T, key: K): Option<ExtractValue<T[K]>>
-function get<T, K extends keyof T>(key: K): (dict: T) => Option<ExtractValue<T[K]>>
+function get<T, K extends keyof T>(dict: T, key: K): Option<NonNullable<T[K]>>
+function get<T, K extends keyof T>(key: K): (dict: T) => Option<NonNullable<T[K]>>
 ```
 
 ```ts
@@ -198,7 +195,7 @@ Returns a new array that contains all keys of the provided object.
 
 
 ```ts
-function keys<T extends Record<string, unknown>>(dict: T): Array<keyof T>
+function keys<T extends Record<string, unknown>>(dict: T): Array<`${Extract<keyof T, string | number>}`>
 ```
 
 ```ts

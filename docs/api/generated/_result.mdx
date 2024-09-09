@@ -1,3 +1,10 @@
+### all
+
+
+```ts
+function all<T extends readonly [...Result<any, any>[]]>(xs: readonly [...T]): Result<TypeOfResultArray<T>, globalThis.Error>
+```
+
 ### catchError
 
 Returns `mapFn(err)` when `result` is of the form `Error(err)`, otherwise, returns `result` unchanged.
@@ -32,14 +39,22 @@ pipe(
 ) // → Error('unknown value')
 ```
 
+### filter
+
+
+```ts
+function filter<A, B>(result: Result<A, B>, predicateFn: (value: A) => boolean): Result<A, B | globalThis.Error>
+function filter<A, B>(predicateFn: (value: A) => boolean): (result: Result<A, B>) => Result<A, B | globalThis.Error>
+```
+
 ### flatMap
 
 Returns the result of `mapFn` (it must have a return type of `Result`) if `result` is `Ok(value)`, otherwise, returns `result` unchanged.
 
 
 ```ts
-function flatMap<A, B, C>(result: Result<A, B>, mapFn: (value: A) => Result<C, B>): Result<C, B>
-function flatMap<A, B, C>(mapFn: (value: A) => Result<C, B>): (result: Result<A, B>) => Result<C, B>
+function flatMap<A, B, C, D = B>(result: Result<A, B>, mapFn: (value: A) => Result<C, D>): Result<C, B | D>
+function flatMap<A, B, C, D = B>(mapFn: (value: A) => Result<C, D>): (result: Result<A, B>) => Result<C, B | D>
 ```
 
 ```ts
@@ -96,13 +111,21 @@ pipe(
 ) // → Ok('value cannot be nullable')
 ```
 
+### fold
+
+
+```ts
+function fold<A, B, C>(result: Result<A, B>, okFn: (value: A) => C, errorFn: (error: B) => C): C
+function fold<A, B, C>(okFn: (value: A) => C, errorFn: (error: B) => C): (result: Result<A, B>) => C
+```
+
 ### fromExecution
 
 Returns `Ok(value)` (`value` is the result of `fn`) if `fn` didn't throw an error, otherwise, returns `Error(err)`.
 
 
 ```ts
-function fromExecution<A>(fn: () => A): Result<ExtractValue<A>, globalThis.Error>
+function fromExecution<A>(fn: () => A): Result<NonNullable<A>, globalThis.Error>
 ```
 
 ```ts
@@ -122,8 +145,8 @@ Returns `Ok(value)` if `value` is not falsy, otherwise, returns `Error(errorValu
 
 
 ```ts
-function fromFalsy<A, B>(value: A, errorValue: NonNullable<B>): Result<ExtractValue<A>, B>
-function fromFalsy<A, B>(errorValue: NonNullable<B>): (value: A) => Result<ExtractValue<A>, B>
+function fromFalsy<A, B>(value: A, errorValue: B): Result<NonNullable<A>, B>
+function fromFalsy<A, B>(errorValue: B): (value: A) => Result<NonNullable<A>, B>
 ```
 
 ```ts
@@ -141,8 +164,8 @@ Returns `Ok(value)` if `value` is non-nullable, otherwise, returns `Error(errorV
 
 
 ```ts
-function fromNullable<A, B>(value: A, errorValue: NonNullable<B>): Result<ExtractValue<A>, B>
-function fromNullable<A, B>(errorValue: NonNullable<B>): (value: A) => Result<ExtractValue<A>, B>
+function fromNullable<A, B>(value: A, errorValue: B): Result<NonNullable<A>, B>
+function fromNullable<A, B>(errorValue: B): (value: A) => Result<NonNullable<A>, B>
 ```
 
 ```ts
@@ -161,15 +184,8 @@ Returns `Ok(value)` if the predicate function returns `true`, otherwise, returns
 
 
 ```ts
-function fromPredicate<A, B>(
-    value: A,
-    predicateFn: (value: NonNullable<A>) => boolean,
-    errorValue: NonNullable<B>
-): Result<ExtractValue<A>, B>
-function fromPredicate<A, B>(
-    predicateFn: (value: NonNullable<A>) => boolean,
-    errorValue: NonNullable<B>
-): (value: A) => Result<ExtractValue<A>, B>
+function fromPredicate<A, B>(value: A, predicateFn: (value: NonNullable<A>) => boolean, errorValue: B): Result<NonNullable<A>, B>
+function fromPredicate<A, B>(predicateFn: (value: NonNullable<A>) => boolean, errorValue: B): (value: A) => Result<NonNullable<A>, B>
 ```
 
 ```ts
@@ -192,7 +208,7 @@ Returns `Ok(value)` if `promise` is resolved successfully, otherwise, returns `E
 
 
 ```ts
-function fromPromise<A>(promise: Promise<A>): Promise<Result<ExtractValue<A>, globalThis.Error>>
+function fromPromise<A>(promise: Promise<A>): Promise<Result<NonNullable<A>, globalThis.Error>>
 ```
 
 ```ts
@@ -223,8 +239,8 @@ Returns `value` if `result` is `Ok(value)`, otherwise, returns a default value.
 
 
 ```ts
-function getWithDefault<A, B>(result: Result<A, B>, defaultValue: NonNullable<A>): A
-function getWithDefault<A, B>(defaultValue: NonNullable<A>): (result: Result<A, B>) => A
+function getWithDefault<A, B>(result: Result<A, B>, defaultValue: A): A
+function getWithDefault<A, B>(defaultValue: A): (result: Result<A, B>) => A
 ```
 
 ```ts
@@ -247,8 +263,8 @@ Converts errors into successful values, and returns a Result where the error cha
 
 
 ```ts
-function handleError<A, B>(result: Result<A, B>, mapFn: (err: B) => NonNullable<A>): Result<A, void>
-function handleError<A, B>(mapFn: (err: B) => NonNullable<A>): (result: Result<A, B>) => Result<A, void>
+function handleError<A, B>(result: Result<A, B>, mapFn: (err: B) => A): Result<A, void>
+function handleError<A, B>(mapFn: (err: B) => A): (result: Result<A, B>) => Result<A, void>
 ```
 
 ```ts
@@ -310,14 +326,28 @@ R.isOk(R.Error('bad')) // → false
 pipe(R.fromNullable(null, 'error'), R.isOk) // → false
 ```
 
+### makeError
+
+
+```ts
+function makeError<A, B>(value: B): Result<A, B>
+```
+
+### makeOk
+
+
+```ts
+function makeOk<A, B>(value: A): Result<A, B>
+```
+
 ### map
 
 Returns the result of `mapFn` if `result` is `Ok(value)`, otherwise, returns `Error(errorValue)` and `mapFn` is not called.
 
 
 ```ts
-function map<A, B, R>(result: Result<A, B>, mapFn: (value: A) => NonNullable<R>): Result<R, B>
-function map<A, B, R>(mapFn: (value: A) => NonNullable<R>): (result: Result<A, B>) => Result<R, B>
+function map<A, B, C>(result: Result<A, B>, mapFn: (value: A) => C): Result<C, B>
+function map<A, B, C>(mapFn: (value: A) => C): (result: Result<A, B>) => Result<C, B>
 ```
 
 ```ts
@@ -356,8 +386,8 @@ Returns `result` unchanged if `result` is of the form `Ok`, otherwise, returns `
 
 
 ```ts
-function mapError<A, B, C>(result: Result<A, B>, mapFn: (err: B) => NonNullable<C>): Result<A, C>
-function mapError<A, B, C>(mapFn: (err: B) => NonNullable<C>): (result: Result<A, B>) => Result<A, C>
+function mapError<A, B, C>(result: Result<A, B>, mapFn: (err: B) => C): Result<A, C>
+function mapError<A, B, C>(mapFn: (err: B) => C): (result: Result<A, B>) => Result<A, C>
 ```
 
 ```ts
@@ -387,12 +417,8 @@ Returns the result of `mapFn` if `result` is `Ok(value)`, otherwise returns a de
 
 
 ```ts
-function mapWithDefault<A, B, R>(
-    result: Result<A, B>,
-    defaultValue: NonNullable<R>,
-    mapFn: (value: A) => NonNullable<R>
-): R
-function mapWithDefault<A, B, R>(defaultValue: NonNullable<R>, mapFn: (value: A) => NonNullable<R>): (result: Result<A, B>) => R
+function mapWithDefault<A, B, C>(result: Result<A, B>, defaultValue: C, mapFn: (value: A) => C): C
+function mapWithDefault<A, B, C>(defaultValue: C, mapFn: (value: A) => C): (result: Result<A, B>) => C
 ```
 
 ```ts
@@ -449,8 +475,8 @@ Ensures that the returned result is `Ok` by returning the provided result if it'
 
 
 ```ts
-function recover<A, B>(result: Result<A, B>, defaultValue: NonNullable<A>): Result<A, B>
-function recover<A, B>(defaultValue: NonNullable<A>): (result: Result<A, B>) => Result<A, B>
+function recover<A, B>(result: Result<A, B>, defaultValue: A): Result<A, B>
+function recover<A, B>(defaultValue: A): (result: Result<A, B>) => Result<A, B>
 ```
 
 ```ts

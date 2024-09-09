@@ -88,7 +88,7 @@ Creates a new array with all sub-array elements concatenated into it recursively
 
 
 ```ts
-function deepFlat<A>(xs: Array<A>): Array<ExtractNested<A>>
+function deepFlat<A>(xs: Array<A>): Array<UnpackArray<A>>
 ```
 
 ### difference
@@ -242,6 +242,14 @@ Creates a new array with all sub-array elements concatenated into it (the single
 function flat<A>(xs: Array<A>): Array<A extends Array<infer B> ? B : A>
 ```
 
+### flatMap
+
+
+```ts
+function flatMap<A, B>(xs: Array<A>, fn: (value: A) => B | Array<B>): Array<B>
+function flatMap<A, B>(fn: (value: A) => B | Array<B>): (xs: Array<A>) => Array<B>
+```
+
 ### flip
 
 Returns a new tuple with the reverse order of the elements.
@@ -337,8 +345,8 @@ Splits the given array into sub-arrays in an object, grouped by the result of ru
 
 
 ```ts
-function groupBy<A, B extends PropertyKey>(xs: Array<A>, groupFn: (item: A) => B): Partial<Record<B, readonly [A, ...A[]]>>
-function groupBy<A, B extends PropertyKey>(groupFn: (item: A) => B): (xs: Array<A>) => Partial<Record<B, readonly [A, ...A[]]>>
+function groupBy<A>(xs: Array<A>, groupFn: (item: A) => PropertyKey): Record<PropertyKey, readonly [A, ...A[]]>
+function groupBy<A>(groupFn: (item: A) => PropertyKey): (xs: Array<A>) => Record<PropertyKey, readonly [A, ...A[]]>
 ```
 
 ### head
@@ -755,6 +763,13 @@ function reverse<A>(xs: Array<A>): Array<A>
 ```ts
 A.reverse([1, 2, 3, 4, 5]) // → [5, 4, 3, 2, 1]
 pipe(['hello', 'world'], A.reverse) // → ['world', 'hello']
+```
+
+### sample
+
+
+```ts
+function sample<A>(xs: Array<A>): A
 ```
 
 ### shuffle

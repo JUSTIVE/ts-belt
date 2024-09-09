@@ -206,8 +206,8 @@ Matches the given string against the provided regular expression, ir returns `No
 
 
 ```ts
-function match(str: string, regex: RegExp): Option<Array<string>>
-function match(regex: RegExp): (str: string) => Option<Array<string>>
+function match(str: string, regex: RegExp): Option<Array<Option<string>>>
+function match(regex: RegExp): (str: string) => Option<Array<Option<string>>>
 ```
 
 ### prepend
