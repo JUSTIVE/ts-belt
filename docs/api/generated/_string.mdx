@@ -19,8 +19,8 @@ function concat(str: string, appendValue: string): string
 ```
 
 ```ts
-S.concat('hello', 'world') // → 'helloworld'
-pipe('ts', S.concat('belt')) // → 'tsbelt'
+S.concat("hello", "world") // → "helloworld"
+pipe("ts", S.concat("belt")) // → "tsbelt"
 ```
 
 ### endsWith
@@ -34,8 +34,8 @@ function endsWith(str: string, substr: string): boolean
 ```
 
 ```ts
-S.endsWith('hello', 'o') // → true
-pipe('ts-belt', S.endsWith('o')) // → false
+S.endsWith("hello", "o") // → true
+pipe("ts-belt", S.endsWith("o")) // → false
 ```
 
 ### get
@@ -49,8 +49,8 @@ function get(n: number): (str: string) => undefined | string
 ```
 
 ```ts
-S.get('hello', 1) // → Some('e')
-pipe('ts-belt', S.get(9)) // → None
+S.get("hello", 1) // → Some("e")
+pipe("ts-belt", S.get(9)) // → None
 ```
 
 ### getUnsafe
@@ -64,8 +64,8 @@ function getUnsafe(n: number): (str: string) => string
 ```
 
 ```ts
-S.getUnsafe('hello', 1) // → 'e'
-pipe('world', S.getUnsafe(1)) // → 'o'
+S.getUnsafe("hello", 1) // → "e"
+pipe("world", S.getUnsafe(1)) // → "o"
 ```
 
 ### head
@@ -78,7 +78,7 @@ function head(str: string): undefined | string
 ```
 
 ```ts
-S.head('random-text') // → Some('r')
+S.head("random-text") // → Some("r")
 ```
 
 ### includes
@@ -92,8 +92,8 @@ function includes(str: string, searchValue: string): boolean
 ```
 
 ```ts
-S.includes('hello', 'll') // → true
-pipe('world', S.includes('ll')) // → false
+S.includes("hello", "ll") // → true
+pipe("world", S.includes("ll")) // → false
 ```
 
 ### indexOf
@@ -107,8 +107,8 @@ function indexOf(str: string, searchValue: string): undefined | number
 ```
 
 ```ts
-S.indexOf('hello', 'e') // → Some(1)
-pipe(['hello', 'world'], A.keepMap(S.indexOf('o'))) // → [4, 1]
+S.indexOf("hello", "e") // → Some(1)
+pipe(["hello", "world"], A.keepMap(S.indexOf("o"))) // → [4, 1]
 ```
 
 ### isEmpty
@@ -121,9 +121,9 @@ function isEmpty(str: string): boolean
 ```
 
 ```ts
-S.isEmpty('hello world') // → false
-S.isEmpty('') // → true
-pipe('ts-belt', S.isEmpty) // → false
+S.isEmpty("hello world") // → false
+S.isEmpty("") // → true
+pipe("ts-belt", S.isEmpty) // → false
 ```
 
 ### isNotEmpty
@@ -136,9 +136,9 @@ function isNotEmpty(str: string): boolean
 ```
 
 ```ts
-S.isNotEmpty('hello world') // → true
-S.isNotEmpty('') // → false
-pipe('ts-belt', S.isNotEmpty) // → true
+S.isNotEmpty("hello world") // → true
+S.isNotEmpty("") // → false
+pipe("ts-belt", S.isNotEmpty) // → true
 ```
 
 ### last
@@ -151,7 +151,7 @@ function last(str: string): undefined | string
 ```
 
 ```ts
-S.last('random-text') // → Some('t')
+S.last("random-text") // → Some("t")
 ```
 
 ### lastIndexOf
@@ -165,9 +165,9 @@ function lastIndexOf(str: string, searchValue: string): undefined | number
 ```
 
 ```ts
-S.lastIndexOf('ts,rescript', 's') // → Some(5)
-S.lastIndexOf('ts,rescript', 'x') // → None
-pipe(['hello', 'ts'], A.keepMap(S.lastIndexOf('l'))) // → [3]
+S.lastIndexOf("ts,rescript", "s") // → Some(5)
+S.lastIndexOf("ts,rescript", "x") // → None
+pipe(["hello", "ts"], A.keepMap(S.lastIndexOf("l"))) // → [3]
 ```
 
 ### length
@@ -180,8 +180,8 @@ function length(str: string): number
 ```
 
 ```ts
-S.length('hello') // → 5
-pipe('ts-belt', S.length) // → 7
+S.length("hello") // → 5
+pipe("ts-belt", S.length) // → 7
 ```
 
 ### make
@@ -194,10 +194,10 @@ function make<A>(value: A): string
 ```
 
 ```ts
-S.make(['hello', 'world']) // → 'hello,world'
-S.make(true) // → 'true'
-pipe({}, S.make) // → '[object Object]'
-pipe(100, S.make) // → '100'
+S.make(["hello", "world"]) // → "hello,world"
+S.make(true) // → "true"
+pipe({}, S.make) // → "[object Object]"
+pipe(100, S.make) // → "100"
 ```
 
 ### match
@@ -221,8 +221,8 @@ function prepend(str: string, prependValue: string): string
 ```
 
 ```ts
-S.prepend('hello', 'world') // → 'worldhello'
-pipe('ts', S.prepend('belt')) // → 'beltts'
+S.prepend("hello", "world") // → "worldhello"
+pipe("ts", S.prepend("belt")) // → "beltts"
 ```
 
 ### remove
@@ -236,8 +236,8 @@ function remove(str: string, value: string): string
 ```
 
 ```ts
-S.remove('hello', 'l') // → 'helo'
-pipe('ts-belt', S.remove('ts-')) // → 'belt'
+S.remove("hello", "l") // → "helo"
+pipe("ts-belt", S.remove("ts-")) // → "belt"
 ```
 
 ### removeAll
@@ -251,8 +251,8 @@ function removeAll(str: string, value: string): string
 ```
 
 ```ts
-S.removeAll('hello', 'l') // → 'heo'
-pipe('hXellXo wXXorXXld', S.removeAll('X')) // → 'hello world'
+S.removeAll("hello", "l") // → "heo"
+pipe("hXellXo wXXorXXld", S.removeAll("X")) // → "hello world"
 ```
 
 ### repeat
@@ -366,8 +366,8 @@ function startsWith(str: string, substr: string): boolean
 ```
 
 ```ts
-S.startsWith('hello', 'o') // → false
-pipe('ts-belt', S.startsWith('ts')) // → true
+S.startsWith("hello", "o") // → false
+pipe("ts-belt", S.startsWith("ts")) // → true
 ```
 
 ### toArray
@@ -407,7 +407,7 @@ function trim(str: string): string
 ```
 
 ```ts
-S.trim('  text') // → 'text'
+S.trim("  text") // → "text"
 ```
 
 ### trimEnd
@@ -420,7 +420,7 @@ function trimEnd(str: string): string
 ```
 
 ```ts
-S.trimEnd('  text  ') // → '  text'
+S.trimEnd("  text  ") // → "  text"
 ```
 
 ### trimStart
@@ -433,5 +433,5 @@ function trimStart(str: string): string
 ```
 
 ```ts
-S.trimStart('  text  ') // → 'text  '
+S.trimStart("  text  ") // → "text  "
 ```

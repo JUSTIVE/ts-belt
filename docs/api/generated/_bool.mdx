@@ -24,8 +24,8 @@ function ifElse<A>(truthyFn: () => A, falsyFn: () => A): (value: boolean) => A
 ```
 
 ```ts
-B.ifElse(true, F.always('ts'), F.always('belt')) // → 'ts'
-pipe(false, B.ifElse(F.always('ts'), F.always('belt'))) // → 'belt'
+B.ifElse(true, F.always("ts"), F.always("belt")) // → "ts"
+pipe(false, B.ifElse(F.always("ts"), F.always("belt"))) // → "belt"
 ```
 
 ### implies
