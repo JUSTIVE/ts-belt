@@ -1,7 +1,6 @@
+import * as fs from "node:fs";
+import * as path from "node:path";
 import type { API, Collection, FileInfo } from "jscodeshift";
-
-import * as fs from "fs";
-import * as path from "path";
 
 import option from "./make-option";
 import readonlyArray from "./make-readonly-array";
@@ -38,7 +37,10 @@ const transform = (file: FileInfo, api: API) => {
 
 	const root = j(currentExports);
 
-	const imports = (collection: Collection<any>, xs: [string, string?][]) => {
+	const imports = (
+		collection: Collection<unknown>,
+		xs: [string, string?][],
+	) => {
 		return xs.reduce((collection, value) => {
 			const [name, path] = value;
 			let hasType = false;

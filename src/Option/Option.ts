@@ -13,7 +13,7 @@ export declare type TypeOfOption<T> = T extends Option<infer U>
 	? ExtractValue<U>
 	: never;
 
-export declare type TypeOfOptionArray<T extends readonly [...any[]]> =
+export declare type TypeOfOptionArray<T extends readonly [...unknown[]]> =
 	T extends [infer Head, ...infer Tail]
 		? readonly [TypeOfOption<Head>, ...TypeOfOptionArray<Tail>]
 		: readonly [];
@@ -47,7 +47,7 @@ export declare function mapNullable<A, B>(
 	option: Option<A>,
 	mapFn: (value: A) => B | null | undefined,
 ): Option<NonNullable<B>>;
-export declare function mapWithDefault<A, B extends NonNullable<any>>(
+export declare function mapWithDefault<A, B extends NonNullable<unknown>>(
 	option: Option<A>,
 	defaultValue: B,
 	mapFn: (value: A) => B,
@@ -64,7 +64,7 @@ export declare function toResult<A, B>(
 	errorValue: B,
 ): Result<A, B>;
 export declare function getExn<A>(option: Option<A>): A | never;
-export declare function getWithDefault<A extends NonNullable<any>>(
+export declare function getWithDefault<A extends NonNullable<unknown>>(
 	option: Option<A>,
 	defaultValue: A,
 ): A;
@@ -74,7 +74,7 @@ export declare function tap<A>(
 	option: Option<A>,
 	someFn: (value: A) => void,
 ): Option<A>;
-export declare function contains<A>(option: Option<A>, value: any): boolean;
+export declare function contains<A>(option: Option<A>, value: unknown): boolean;
 export declare function zip<A, B>(
 	fstOption: Option<A>,
 	sndOption: Option<B>,
@@ -89,6 +89,6 @@ export declare function fold<A, B>(
 	someFn: (value: A) => B,
 	errorFn: () => B,
 ): B;
-export declare function all<T extends readonly [...Option<any>[]]>(
+export declare function all<T extends readonly [...Option<unknown>[]]>(
 	xs: readonly [...T],
 ): Option<TypeOfOptionArray<T>>;

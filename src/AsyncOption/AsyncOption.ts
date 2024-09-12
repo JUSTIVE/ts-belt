@@ -1,5 +1,5 @@
-import type { Option, None, Some } from "../Option";
 import type { AsyncResult } from "../AsyncResult";
+import type { None, Option, Some } from "../Option";
 
 export declare type AsyncOption<A> = Promise<Option<A>>;
 

@@ -15,11 +15,11 @@ import {
 
 import type * as AST from "ast-types/gen/kinds";
 
-import * as fs from "fs";
-import * as path from "path";
+import * as fs from "node:fs";
+import * as path from "node:path";
 
 const defaultEncoding = { encoding: "utf-8" } as const;
-const coerce = <A>(a: any) => a as A;
+const coerce = <A>(a: unknown) => a as A;
 const getIdentifier = (p: ASTPath<ExportNamedDeclaration>): Identifier => {
 	const { declaration } = p.value;
 
@@ -63,7 +63,7 @@ const getTSFunctionOptions = (p: TSFunctionType | TSDeclareFunction) => {
 const transform = (
 	source: string,
 	j: API["jscodeshift"],
-	ctx: Record<string, any>,
+	ctx: Record<string, unknown>,
 ): string => {
 	const root = j(source);
 	const dirname = path.dirname(ctx.file.path);
@@ -74,18 +74,18 @@ const transform = (
 	const empty = j("");
 	const alreadyAddedExports = [] as string[];
 
-	const customTS: Collection<any> = fs.existsSync(customTSFile)
+	const customTS: Collection<unknown> = fs.existsSync(customTSFile)
 		? j(fs.readFileSync(customTSFile, defaultEncoding))
 		: empty;
-	const rescriptJS: Collection<any> = fs.existsSync(rescriptJSFile)
+	const rescriptJS: Collection<unknown> = fs.existsSync(rescriptJSFile)
 		? j(fs.readFileSync(rescriptJSFile, defaultEncoding))
 		: empty;
 
 	const makeTSDeclareFunction = (
 		name: string,
-		parameters: any[],
-		typeParameters: any,
-		returnType: any,
+		parameters: unknown[],
+		typeParameters: unknown,
+		returnType: unknown,
 	) => {
 		const tsDeclareFunction = j.tsDeclareFunction(
 			j.identifier(name),

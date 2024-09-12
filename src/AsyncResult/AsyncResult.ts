@@ -1,5 +1,5 @@
-import type { Ok, Error, Result } from "../Result";
 import type { Option } from "../Option";
+import type { Error, Ok, Result } from "../Result";
 
 export declare type AsyncResult<A, B> = Promise<Result<A, B>>;
 

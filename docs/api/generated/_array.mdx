@@ -50,8 +50,8 @@ Alias for `get`.
 
 
 ```ts
-function at<A>(xs: Array<A>, index: number): undefined | A
-function at<A>(index: number): (xs: Array<A>) => undefined | A
+function at<A>(xs: Array<A>, index: number): Option<A>
+function at<A>(index: number): (xs: Array<A>) => Option<A>
 ```
 
 ### concat
@@ -131,8 +131,8 @@ Returns a new array (`Some(xs)`) that does not contain the first `n` elements of
 
 
 ```ts
-function dropExactly<A>(xs: Array<A>, n: number): undefined | Array<A>
-function dropExactly<A>(n: number): (xs: Array<A>) => undefined | Array<A>
+function dropExactly<A>(xs: Array<A>, n: number): Option<Array<A>>
+function dropExactly<A>(n: number): (xs: Array<A>) => Option<Array<A>>
 ```
 
 ### dropWhile
@@ -196,8 +196,8 @@ Returns a new array that keep all elements that return `Some(value)` applied wit
 
 
 ```ts
-function filterMap<A, B>(xs: Array<A>, predicateFn: (_1: A) => undefined | B): Array<B>
-function filterMap<A, B>(predicateFn: (_1: A) => undefined | B): (xs: Array<A>) => Array<B>
+function filterMap<A, B>(xs: Array<A>, predicateFn: (_1: A) => Option<B>): Array<B>
+function filterMap<A, B>(predicateFn: (_1: A) => Option<B>): (xs: Array<A>) => Array<B>
 ```
 
 ```ts
@@ -231,8 +231,8 @@ Alias for `getBy`.
 
 
 ```ts
-function find<A>(xs: Array<A>, predicateFn: (_1: A) => boolean): undefined | A
-function find<A>(predicateFn: (_1: A) => boolean): (xs: Array<A>) => undefined | A
+function find<A>(xs: Array<A>, predicateFn: (_1: A) => boolean): Option<A>
+function find<A>(predicateFn: (_1: A) => boolean): (xs: Array<A>) => Option<A>
 ```
 
 ### flat
@@ -297,8 +297,8 @@ Returns `Some(value)` at the given index, or `None` if the given index is out of
 
 
 ```ts
-function get<A>(xs: Array<A>, index: number): undefined | A
-function get<A>(index: number): (xs: Array<A>) => undefined | A
+function get<A>(xs: Array<A>, index: number): Option<A>
+function get<A>(index: number): (xs: Array<A>) => Option<A>
 ```
 
 ### getBy
@@ -307,8 +307,8 @@ Returns `Some(value)` for the first element in the array that satisifies the giv
 
 
 ```ts
-function getBy<A>(xs: Array<A>, predicateFn: (_1: A) => boolean): undefined | A
-function getBy<A>(predicateFn: (_1: A) => boolean): (xs: Array<A>) => undefined | A
+function getBy<A>(xs: Array<A>, predicateFn: (_1: A) => boolean): Option<A>
+function getBy<A>(predicateFn: (_1: A) => boolean): (xs: Array<A>) => Option<A>
 ```
 
 ### getIndexBy
@@ -317,8 +317,8 @@ Returns `Some(index)` for the first value in the provided array that satisifies 
 
 
 ```ts
-function getIndexBy<A>(xs: Array<A>, predicateFn: (_1: A) => boolean): undefined | number
-function getIndexBy<A>(predicateFn: (_1: A) => boolean): (xs: Array<A>) => undefined | number
+function getIndexBy<A>(xs: Array<A>, predicateFn: (_1: A) => boolean): Option<number>
+function getIndexBy<A>(predicateFn: (_1: A) => boolean): (xs: Array<A>) => Option<number>
 ```
 
 ### getUndefined
@@ -327,8 +327,8 @@ Returns `value` at the given index, or `undefined` if the given index is out of 
 
 
 ```ts
-function getUndefined<A>(xs: Array<A>, index: number): undefined | A
-function getUndefined<A>(index: number): (xs: Array<A>) => undefined | A
+function getUndefined<A>(xs: Array<A>, index: number): Option<A>
+function getUndefined<A>(index: number): (xs: Array<A>) => Option<A>
 ```
 
 ### getUnsafe
@@ -357,7 +357,7 @@ Returns `Some(value)` where `value` is the first element of the array, or `None`
 
 
 ```ts
-function head<A>(xs: Array<A>): undefined | A
+function head<A>(xs: Array<A>): Option<A>
 ```
 
 ### includes
@@ -376,7 +376,7 @@ Returns a new array (`Some(xs)`) with all elements except the last of the provid
 
 
 ```ts
-function init<A>(xs: Array<A>): undefined | Array<A>
+function init<A>(xs: Array<A>): Option<Array<A>>
 ```
 
 ### initOrEmpty
@@ -481,8 +481,8 @@ Alias for `filterMap`.
 
 
 ```ts
-function keepMap<A, B>(xs: Array<A>, predicateFn: (_1: A) => undefined | B): Array<B>
-function keepMap<A, B>(predicateFn: (_1: A) => undefined | B): (xs: Array<A>) => Array<B>
+function keepMap<A, B>(xs: Array<A>, predicateFn: (_1: A) => Option<B>): Array<B>
+function keepMap<A, B>(predicateFn: (_1: A) => Option<B>): (xs: Array<A>) => Array<B>
 ```
 
 ### keepWithIndex
@@ -503,7 +503,7 @@ Returns the last element (`Some(value)`) in the array, or `None` if the given ar
 
 
 ```ts
-function last<A>(xs: Array<A>): undefined | A
+function last<A>(xs: Array<A>): Option<A>
 ```
 
 ### length
@@ -845,8 +845,8 @@ Returns two arrays (`Some([xs, ys])`), with the original array divided at the gi
 
 
 ```ts
-function splitAt<A>(xs: Array<A>, offset: number): undefined | readonly [Array<A>, Array<A>]
-function splitAt<A>(offset: number): (xs: Array<A>) => undefined | readonly [Array<A>, Array<A>]
+function splitAt<A>(xs: Array<A>, offset: number): Option<readonly [Array<A>, Array<A>]>
+function splitAt<A>(offset: number): (xs: Array<A>) => Option<readonly [Array<A>, Array<A>]>
 ```
 
 ### splitEvery
@@ -875,7 +875,7 @@ Returns a new array containing all but the the first element of the provided arr
 
 
 ```ts
-function tail<A>(xs: Array<A>): undefined | Array<A>
+function tail<A>(xs: Array<A>): Option<Array<A>>
 ```
 
 ```ts
@@ -910,8 +910,8 @@ Returns a new array (`Some(xs)`) with the first `n` elements of the provided arr
 
 
 ```ts
-function takeExactly<A>(xs: Array<A>, n: number): undefined | Array<A>
-function takeExactly<A>(n: number): (xs: Array<A>) => undefined | Array<A>
+function takeExactly<A>(xs: Array<A>, n: number): Option<Array<A>>
+function takeExactly<A>(n: number): (xs: Array<A>) => Option<Array<A>>
 ```
 
 ### takeWhile
@@ -949,7 +949,7 @@ Splits the provided array into head and tail parts (as a tuple), but only if the
 
 
 ```ts
-function uncons<A>(xs: Array<A>): undefined | readonly [A, Array<A>]
+function uncons<A>(xs: Array<A>): Option<readonly [A, Array<A>]>
 ```
 
 ### union

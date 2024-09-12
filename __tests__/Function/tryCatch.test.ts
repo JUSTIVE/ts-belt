@@ -41,7 +41,7 @@ describe("tryCatch", () => {
 			Ok({ name: "Joe" }),
 		);
 		expect(F.tryCatch("<>", JSON.parse)).toEqual(
-			R.Error(new Error("Unexpected token < in JSON at position 0")),
+			R.Error(new Error(`Unexpected token '<', "<>" is not valid JSON`)),
 		);
 	});
 });

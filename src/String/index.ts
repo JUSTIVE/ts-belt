@@ -1,4 +1,5 @@
-import type { Array } from "../types";
+import { Array } from "../types";
+import { Option } from "../Option";
 /** Converts the given value to a string. */
 
 export declare function make<A>(value: A): string;
@@ -30,8 +31,8 @@ export declare function prepend(str: string, prependValue: string): string;
 export declare function slice(str: string, start: number, end: number): string;
 
 export declare function slice(
-	start: number,
-	end: number,
+  start: number,
+  end: number
 ): (str: string) => string;
 
 /** Returns the substring of `str` starting at character `start` to the end of the string. */
@@ -71,7 +72,7 @@ export declare function isNotEmpty(str: string): boolean;
 /** Splits the given string at every occurrence of `delimiter` and returns an array of the resulting substrings. */
 
 export declare function split(
-	delimiter: string,
+  delimiter: string
 ): (str: string) => Array<string>;
 
 export declare function split(str: string, delimiter: string): Array<string>;
@@ -79,23 +80,23 @@ export declare function split(str: string, delimiter: string): Array<string>;
 /** Splits the given string at every occurrence of `regex` and returns an array of the resulting substrings. */
 
 export declare function splitByRe(
-	str: string,
-	regex: RegExp,
-): Array<undefined | string>;
+  str: string,
+  regex: RegExp
+): Array<Option<string>>;
 
 export declare function splitByRe(
-	regex: RegExp,
-): (str: string) => Array<undefined | string>;
+  regex: RegExp
+): (str: string) => Array<Option<string>>;
 
 /** Splits the string at the given index, returning a tuple of the parts. */
 
 export declare function splitAt(
-	str: string,
-	index: number,
+  str: string,
+  index: number
 ): readonly [string, string];
 
 export declare function splitAt(
-	index: number,
+  index: number
 ): (str: string) => readonly [string, string];
 
 /** Returns `true` if `searchValue` appears anywhere in the given string. */
@@ -107,40 +108,40 @@ export declare function includes(str: string, searchValue: string): boolean;
 /** Replaces the first occurrence of `oldValue` with `newValue` in the given string and returns a new string. */
 
 export declare function replace(
-	oldValue: string,
-	newValue: string,
+  oldValue: string,
+  newValue: string
 ): (str: string) => string;
 
 export declare function replace(
-	str: string,
-	oldValue: string,
-	newValue: string,
+  str: string,
+  oldValue: string,
+  newValue: string
 ): string;
 
 /** Replaces each occurrence of `oldValue` with `newValue` in the given string and returns a new string. */
 
 export declare function replaceAll(
-	oldValue: string,
-	newValue: string,
+  oldValue: string,
+  newValue: string
 ): (str: string) => string;
 
 export declare function replaceAll(
-	str: string,
-	oldValue: string,
-	newValue: string,
+  str: string,
+  oldValue: string,
+  newValue: string
 ): string;
 
 /** Replaces the matched regular expression with `newValue` in the given string and returns a new string. */
 
 export declare function replaceByRe(
-	str: string,
-	regex: RegExp,
-	value: string,
+  str: string,
+  regex: RegExp,
+  value: string
 ): string;
 
 export declare function replaceByRe(
-	regex: RegExp,
-	value: string,
+  regex: RegExp,
+  value: string
 ): (str: string) => string;
 
 /** Returns a new string with the first occurrence of `value` removed from `str`. */
@@ -157,22 +158,20 @@ export declare function removeAll(str: string, value: string): string;
 
 /** Returns `Some(index)`, where `index` is the starting position of the first match of regular expression in the given string. */
 
-export declare function search(str: string, regex: RegExp): undefined | number;
+export declare function search(str: string, regex: RegExp): Option<number>;
 
-export declare function search(
-	regex: RegExp,
-): (str: string) => undefined | number;
+export declare function search(regex: RegExp): (str: string) => Option<number>;
 
 /** Matches the given string against the provided regular expression, ir returns `None` if there is no match. */
 
 export declare function match(
-	str: string,
-	regex: RegExp,
-): undefined | Array<undefined | string>;
+  str: string,
+  regex: RegExp
+): Option<Array<Option<string>>>;
 
 export declare function match(
-	regex: RegExp,
-): (str: string) => undefined | Array<undefined | string>;
+  regex: RegExp
+): (str: string) => Option<Array<Option<string>>>;
 
 /** Returns a string consisting of `n` repetitions of `str`. */
 
@@ -183,24 +182,24 @@ export declare function repeat(n: number): (str: string) => string;
 /** Returns `Some(index)`, where `index` is the starting position of the first occurrence of `searchValue` within `str`. */
 
 export declare function indexOf(
-	searchValue: string,
-): (str: string) => undefined | number;
+  searchValue: string
+): (str: string) => Option<number>;
 
 export declare function indexOf(
-	str: string,
-	searchValue: string,
-): undefined | number;
+  str: string,
+  searchValue: string
+): Option<number>;
 
 /** Returns `Some(index)`, where `index` is the starting position of the last occurrence of `searchValue` within `str`. */
 
 export declare function lastIndexOf(
-	searchValue: string,
-): (str: string) => undefined | number;
+  searchValue: string
+): (str: string) => Option<number>;
 
 export declare function lastIndexOf(
-	str: string,
-	searchValue: string,
-): undefined | number;
+  str: string,
+  searchValue: string
+): Option<number>;
 
 /** Returns `true` if the given string ends with `substr`. */
 
@@ -222,9 +221,9 @@ export declare function getUnsafe(n: number): (str: string) => string;
 
 /** Returns `Some(value)`, where `value` is a string consisting of the character at location `n` in the string, or `None` if the `n` is out of range. */
 
-export declare function get(str: string, n: number): undefined | string;
+export declare function get(str: string, n: number): Option<string>;
 
-export declare function get(n: number): (str: string) => undefined | string;
+export declare function get(n: number): (str: string) => Option<string>;
 
 /** Creates an array with one character of `str` per element. */
 
@@ -232,8 +231,8 @@ export declare function toArray(str: string): Array<string>;
 
 /** Returns `Some(value)` where `value` is the first character of the string, or `None` if the given string is empty. */
 
-export declare function head(str: string): undefined | string;
+export declare function head(str: string): Option<string>;
 
 /** Returns `Some(value)` where `value` is the last character of the string, or `None` if the given string is empty. */
 
-export declare function last(str: string): undefined | string;
+export declare function last(str: string): Option<string>;

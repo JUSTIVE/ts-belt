@@ -6,7 +6,7 @@ const transform = (source: string, j: API["jscodeshift"]): string => {
 		.find(j.TSUnionType)
 		.filter((p) => {
 			return (
-				p.value.types.some((value) => value.type === "TSNullKeyword") &&
+				p.value.types.some((value) => value.type === "TSNullKeyword") ||
 				p.value.types.some((value) => value.type === "TSUndefinedKeyword")
 			);
 		})

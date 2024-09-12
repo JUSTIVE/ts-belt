@@ -324,7 +324,7 @@ readonly prop: string
 
 F.tryCatch('{"name": "Joe"}', JSON.parse) // → Ok({ name: "Joe" })
 
-F.tryCatch("<>", JSON.parse) // → R.Error(new Error("Unexpected token < in JSON at position 0"))
+F.tryCatch("<>", JSON.parse) // → R.Error(new Error(`Unexpected token '<', "<>" is not valid JSON`))
 pipe(
     '{"name": "Joe"}',
     F.tryCatch<string, User>(JSON.parse),

@@ -10,6 +10,7 @@ describe("isNone", () => {
 	it("returns true", () => {
 		expect(O.isNone(O.None)).toBeTruthy();
 		expect(pipe(O.fromNullable(null), O.isNone)).toBeTruthy();
+		// expect(pipe(null, O.isNone)).toBeTruthy();
 	});
 
 	it("returns false", () => {
@@ -19,6 +20,7 @@ describe("isNone", () => {
 
 	it("*", () => {
 		expect(O.isNone(O.None)).toEqual(true);
+		expect(O.isNone(null)).toEqual(true);
 		expect(pipe(O.fromNullable(null), O.isNone)).toEqual(true);
 		expect(O.isNone(O.Some("hello world!"))).toEqual(false);
 		expect(pipe(O.fromNullable("hello world!"), O.isNone)).toEqual(false);

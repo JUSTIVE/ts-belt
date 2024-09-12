@@ -116,7 +116,11 @@ let match = (option, someFn, noneFn) =>
 
 %comment("Returns `true` if the provided `option` is `None`, otherwise, returns `false`.")
 @gentype
-let isNone = option => Belt.Option.isNone(option)
+let isNone = (option: option<Js.Nullable.t<'a>>) =>
+  switch option {
+  | None => false
+  | Some(v) => v != Js.Nullable.null
+  }
 
 %comment("Returns `true` if the provided `option` is `Some(value)`, otherwise, returns `false`.")
 @gentype

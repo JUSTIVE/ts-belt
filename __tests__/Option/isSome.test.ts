@@ -18,6 +18,7 @@ describe("isSome", () => {
 	});
 
 	it("*", () => {
+		expect(O.isSome(null)).toEqual(false);
 		expect(O.isSome(O.Some("hello world!"))).toEqual(true);
 		expect(pipe(O.fromNullable("hello world!"), O.isSome)).toEqual(true);
 		expect(O.isSome(O.None)).toEqual(false);

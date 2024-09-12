@@ -1,6 +1,6 @@
 import type { AsyncData, Complete, Reloading } from "../AsyncData";
 import type { Option } from "../Option";
-import type { Ok, Error, Result } from "../Result";
+import type { Error, Ok, Result } from "../Result";
 
 export declare type AsyncDataResult<A, B> = AsyncData<Result<A, B>>;
 

@@ -91,14 +91,14 @@
 	"sideEffects": false,
 	"files": ["dist", "*.md", "package.json", "index.js.flow"],
 	"scripts": {
-		"build": "yarn foy -c ./scripts/build.ts",
+		"build": "bun foy -c ./scripts/build.ts",
 		"clean": "rm -rf ./dist && rm -f ./tsconfig.tsbuildinfo",
-		"test": "yarn foy -c ./scripts/test.ts",
-		"re:clean": "yarn rescript clean",
-		"re:build": "yarn rescript build",
-		"re:dev": "yarn rescript build -w",
-		"transform": "yarn foy -c ./scripts/transform.ts",
-		"generate": "yarn foy -c ./scripts/generate.ts"
+		"test": "bun foy -c ./scripts/test.ts run",
+		"re:clean": "bun rescript clean",
+		"re:build": "bun rescript build",
+		"re:dev": "bun rescript build -w",
+		"transform": "bun foy -c ./scripts/transform.ts",
+		"generate": "bun foy -c ./scripts/generate.ts"
 	},
 	"engines": {
 		"node": ">= 10.*"

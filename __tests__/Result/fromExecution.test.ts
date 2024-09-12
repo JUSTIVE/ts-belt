@@ -23,7 +23,9 @@ describe("fromExecution", () => {
 
 	it("returns None", () => {
 		expect(R.fromExecution(parseJSON(badJSON))).toEqual(
-			R.Error(new SyntaxError("Unexpected token n in JSON at position 1")),
+			R.Error(
+				new SyntaxError("Expected property name or '}' in JSON at position 1"),
+			),
 		);
 	});
 
@@ -49,7 +51,9 @@ describe("fromExecution", () => {
 		).toEqual(Ok({ name: "John" }));
 
 		expect(R.fromExecution(parseJSON<User>(badJSON))).toEqual(
-			Error(new SyntaxError("Unexpected token n in JSON at position 1")),
+			Error(
+				new SyntaxError("Expected property name or '}' in JSON at position 1"),
+			),
 		);
 	});
 });

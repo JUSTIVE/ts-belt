@@ -3,7 +3,7 @@
 
 ```ts
 function all<
-  A extends readonly [...AsyncDataResult<any, any>[]],
+  A extends readonly [...AsyncDataResult<any, any>[]]
 >(xs: readonly [...A]): AsyncDataResult<TypeOfAsyncDataResultArray<A>, globalThis.Error>
 ```
 
