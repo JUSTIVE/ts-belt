@@ -1,18 +1,18 @@
-import { expectType } from 'ts-expect'
+import { expectType } from "ts-expect";
 
-import { A } from '../..'
+import { A } from "../..";
 
-describe('makeEmpty', () => {
-  it('provides correct types', () => {
-    expectType<ReadonlyArray<number>>(A.makeEmpty<number>())
-  })
+describe("makeEmpty", () => {
+	it("provides correct types", () => {
+		expectType<ReadonlyArray<number>>(A.makeEmpty<number>());
+	});
 
-  it('creates an empty array', () => {
-    const result = A.makeEmpty<string>()
-    expect(result).toEqual([])
-  })
+	it("creates an empty array", () => {
+		const result = A.makeEmpty<string>();
+		expect(result).toEqual([]);
+	});
 
-  it('*', () => {
-    expect(A.makeEmpty<number>()).toEqual([])
-  })
-})
+	it("*", () => {
+		expect(A.makeEmpty<number>()).toEqual([]);
+	});
+});
