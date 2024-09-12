@@ -1,5 +1,4 @@
 import { Array } from '../types'
-import { Option } from '../Option'
 /** Converts the given value to a string. */
 
 export declare function make<A>(value: A): string
@@ -80,11 +79,11 @@ export declare function split(str: string, delimiter: string): Array<string>
 export declare function splitByRe(
   str: string,
   regex: RegExp,
-): Array<Option<string>>
+): Array<undefined | string>
 
 export declare function splitByRe(
   regex: RegExp,
-): (str: string) => Array<Option<string>>
+): (str: string) => Array<undefined | string>
 
 /** Splits the string at the given index, returning a tuple of the parts. */
 
@@ -156,20 +155,22 @@ export declare function removeAll(str: string, value: string): string
 
 /** Returns `Some(index)`, where `index` is the starting position of the first match of regular expression in the given string. */
 
-export declare function search(str: string, regex: RegExp): Option<number>
+export declare function search(str: string, regex: RegExp): undefined | number
 
-export declare function search(regex: RegExp): (str: string) => Option<number>
+export declare function search(
+  regex: RegExp,
+): (str: string) => undefined | number
 
 /** Matches the given string against the provided regular expression, ir returns `None` if there is no match. */
 
 export declare function match(
   str: string,
   regex: RegExp,
-): Option<Array<Option<string>>>
+): undefined | Array<undefined | string>
 
 export declare function match(
   regex: RegExp,
-): (str: string) => Option<Array<Option<string>>>
+): (str: string) => undefined | Array<undefined | string>
 
 /** Returns a string consisting of `n` repetitions of `str`. */
 
@@ -181,23 +182,23 @@ export declare function repeat(n: number): (str: string) => string
 
 export declare function indexOf(
   searchValue: string,
-): (str: string) => Option<number>
+): (str: string) => undefined | number
 
 export declare function indexOf(
   str: string,
   searchValue: string,
-): Option<number>
+): undefined | number
 
 /** Returns `Some(index)`, where `index` is the starting position of the last occurrence of `searchValue` within `str`. */
 
 export declare function lastIndexOf(
   searchValue: string,
-): (str: string) => Option<number>
+): (str: string) => undefined | number
 
 export declare function lastIndexOf(
   str: string,
   searchValue: string,
-): Option<number>
+): undefined | number
 
 /** Returns `true` if the given string ends with `substr`. */
 
@@ -219,9 +220,9 @@ export declare function getUnsafe(n: number): (str: string) => string
 
 /** Returns `Some(value)`, where `value` is a string consisting of the character at location `n` in the string, or `None` if the `n` is out of range. */
 
-export declare function get(str: string, n: number): Option<string>
+export declare function get(str: string, n: number): undefined | string
 
-export declare function get(n: number): (str: string) => Option<string>
+export declare function get(n: number): (str: string) => undefined | string
 
 /** Creates an array with one character of `str` per element. */
 
@@ -229,8 +230,8 @@ export declare function toArray(str: string): Array<string>
 
 /** Returns `Some(value)` where `value` is the first character of the string, or `None` if the given string is empty. */
 
-export declare function head(str: string): Option<string>
+export declare function head(str: string): undefined | string
 
 /** Returns `Some(value)` where `value` is the last character of the string, or `None` if the given string is empty. */
 
-export declare function last(str: string): Option<string>
+export declare function last(str: string): undefined | string

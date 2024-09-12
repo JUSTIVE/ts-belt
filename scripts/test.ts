@@ -20,7 +20,7 @@ option('-c, --coverage', 'coverage')
 task<Options>('run', async ctx => {
   const coverage = ctx.options.coverage ? '--coverage' : ''
 
-  const cmd = ['yarn', 'jest', coverage]
+  const cmd = ['bun', 'jest', coverage]
 
   if (ctx.options.namespace || ctx.options.file) {
     const namespace = ctx.options.namespace || '**'

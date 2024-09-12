@@ -1,5 +1,4 @@
 import { UnpackArray, Array } from '../types'
-import { Option } from '../Option'
 /** Creates an empty array. Alternative for `const xs = [] as ReadonlyArray<A>`. */
 
 export declare function makeEmpty<A>(): Array<A>
@@ -71,15 +70,15 @@ export declare function intersperse<A>(delimiter: A): (xs: Array<A>) => Array<A>
 
 /** Returns `Some(value)` at the given index, or `None` if the given index is out of range. */
 
-export declare function get<A>(xs: Array<A>, index: number): Option<A>
+export declare function get<A>(xs: Array<A>, index: number): undefined | A
 
-export declare function get<A>(index: number): (xs: Array<A>) => Option<A>
+export declare function get<A>(index: number): (xs: Array<A>) => undefined | A
 
 /** Alias for `get`. */
 
-export declare function at<A>(xs: Array<A>, index: number): Option<A>
+export declare function at<A>(xs: Array<A>, index: number): undefined | A
 
-export declare function at<A>(index: number): (xs: Array<A>) => Option<A>
+export declare function at<A>(index: number): (xs: Array<A>) => undefined | A
 
 /** Returns `value` at the given index (use only if you're entirely sure that a value exists at the given index). */
 
@@ -92,45 +91,45 @@ export declare function getUnsafe<A>(index: number): (xs: Array<A>) => A
 export declare function getUndefined<A>(
   xs: Array<A>,
   index: number,
-): A | undefined
+): undefined | A
 
 export declare function getUndefined<A>(
   index: number,
-): (xs: Array<A>) => A | undefined
+): (xs: Array<A>) => undefined | A
 
 /** Returns `Some(value)` for the first element in the array that satisifies the given predicate function, or `None` if no element satisifies the predicate. */
 
 export declare function getBy<A>(
   xs: Array<A>,
   predicateFn: (_1: A) => boolean,
-): Option<A>
+): undefined | A
 
 export declare function getBy<A>(
   predicateFn: (_1: A) => boolean,
-): (xs: Array<A>) => Option<A>
+): (xs: Array<A>) => undefined | A
 
 /** Alias for `getBy`. */
 
 export declare function find<A>(
   xs: Array<A>,
   predicateFn: (_1: A) => boolean,
-): Option<A>
+): undefined | A
 
 export declare function find<A>(
   predicateFn: (_1: A) => boolean,
-): (xs: Array<A>) => Option<A>
+): (xs: Array<A>) => undefined | A
 
 /** Returns `Some(value)` where `value` is the first element of the array, or `None` if the given array is empty. */
 
-export declare function head<A>(xs: Array<A>): Option<A>
+export declare function head<A>(xs: Array<A>): undefined | A
 
 /** Returns the last element (`Some(value)`) in the array, or `None` if the given array is empty. */
 
-export declare function last<A>(xs: Array<A>): Option<A>
+export declare function last<A>(xs: Array<A>): undefined | A
 
 /** Returns a new array containing all but the the first element of the provided array, or `None` if the given array is empty (has no tail). */
 
-export declare function tail<A>(xs: Array<A>): Option<Array<A>>
+export declare function tail<A>(xs: Array<A>): undefined | Array<A>
 
 /** Returns a new array containing all but the first element of the provided array, or an empty array if the given array is empty (has no tail). */
 
@@ -138,7 +137,7 @@ export declare function tailOrEmpty<A>(xs: Array<A>): Array<A>
 
 /** Returns a new array (`Some(xs)`) with all elements except the last of the provided array. */
 
-export declare function init<A>(xs: Array<A>): Option<Array<A>>
+export declare function init<A>(xs: Array<A>): undefined | Array<A>
 
 /** Returns a new array with all elements except the last of the provided array, or an empty array if the given array is empty. */
 
@@ -155,11 +154,11 @@ export declare function take<A>(n: number): (xs: Array<A>) => Array<A>
 export declare function takeExactly<A>(
   xs: Array<A>,
   n: number,
-): Option<Array<A>>
+): undefined | Array<A>
 
 export declare function takeExactly<A>(
   n: number,
-): (xs: Array<A>) => Option<Array<A>>
+): (xs: Array<A>) => undefined | Array<A>
 
 /** Returns a new array, filled with elements from the provided array until an element doesn't pass the provided predicate. */
 
@@ -183,11 +182,11 @@ export declare function drop<A>(n: number): (xs: Array<A>) => Array<A>
 export declare function dropExactly<A>(
   xs: Array<A>,
   n: number,
-): Option<Array<A>>
+): undefined | Array<A>
 
 export declare function dropExactly<A>(
   n: number,
-): (xs: Array<A>) => Option<Array<A>>
+): (xs: Array<A>) => undefined | Array<A>
 
 /** Drops elements from the beginning of the array until an element is reached which does not satisfy the given predicate. */
 
@@ -202,7 +201,9 @@ export declare function dropWhile<A>(
 
 /** Splits the provided array into head and tail parts (as a tuple), but only if the array is not empty. */
 
-export declare function uncons<A>(xs: Array<A>): Option<readonly [A, Array<A>]>
+export declare function uncons<A>(
+  xs: Array<A>,
+): undefined | readonly [A, Array<A>]
 
 /** Returns a new array by calling `mapFn` for each element of the provided array. */
 
@@ -377,11 +378,11 @@ export declare function reduceWithIndex<A, B>(
 export declare function splitAt<A>(
   xs: Array<A>,
   offset: number,
-): Option<readonly [Array<A>, Array<A>]>
+): undefined | readonly [Array<A>, Array<A>]
 
 export declare function splitAt<A>(
   offset: number,
-): (xs: Array<A>) => Option<readonly [Array<A>, Array<A>]>
+): (xs: Array<A>) => undefined | readonly [Array<A>, Array<A>]
 
 /** Returns an array of arrays, where each of the inner arrays has length equal to the provided `size` parameter. */
 
@@ -630,11 +631,11 @@ export declare function forEachWithIndex<A>(
 export declare function getIndexBy<A>(
   xs: Array<A>,
   predicateFn: (_1: A) => boolean,
-): Option<number>
+): undefined | number
 
 export declare function getIndexBy<A>(
   predicateFn: (_1: A) => boolean,
-): (xs: Array<A>) => Option<number>
+): (xs: Array<A>) => undefined | number
 
 /** Returns `true` if the provided value is equal to at least one element of the given array. */
 
@@ -711,22 +712,22 @@ export declare function flip<A, B>(xs: readonly [A, B]): readonly [B, A]
 
 export declare function filterMap<A, B>(
   xs: Array<A>,
-  predicateFn: (_1: A) => Option<B>,
+  predicateFn: (_1: A) => undefined | B,
 ): Array<B>
 
 export declare function filterMap<A, B>(
-  predicateFn: (_1: A) => Option<B>,
+  predicateFn: (_1: A) => undefined | B,
 ): (xs: Array<A>) => Array<B>
 
 /** Alias for `filterMap`. */
 
 export declare function keepMap<A, B>(
   xs: Array<A>,
-  predicateFn: (_1: A) => Option<B>,
+  predicateFn: (_1: A) => undefined | B,
 ): Array<B>
 
 export declare function keepMap<A, B>(
-  predicateFn: (_1: A) => Option<B>,
+  predicateFn: (_1: A) => undefined | B,
 ): (xs: Array<A>) => Array<B>
 
 /** Removes the first occurrence of the given value from the array, using the given equality function. */

@@ -145,7 +145,7 @@
     "all-contributors-cli": "^6.20.5",
     "common-tags": "^1.8.2",
     "coveralls": "^3.1.1",
-    "foy": "^0.2.16",
+    "foy": "^0.2.23",
     "gentype": "^4.5.0",
     "globby": "^11.0.3",
     "jest": "^29.0.3",

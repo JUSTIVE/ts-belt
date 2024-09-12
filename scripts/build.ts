@@ -20,12 +20,12 @@ desc('Build dist')
 option('-t, --run-tests', 'run tests')
 task<Options>('dist', async ctx => {
   await ctx.exec([
-    'yarn clean',
-    'yarn re:clean',
-    'yarn re:build',
-    'yarn transform all',
-    'yarn generate docs',
-    'yarn rollup -c rollup.config.js --bundleConfigAsCjs',
+    'bun clean',
+    'bun re:clean',
+    'bun re:build',
+    'bun transform all',
+    'bun generate docs',
+    'bun rollup -c rollup.config.js --bundleConfigAsCjs',
   ])
 
   const files = await globby('dist/*.js')
@@ -35,12 +35,12 @@ task<Options>('dist', async ctx => {
     `node node_modules/.bin/jscodeshift --run-in-band -t tools/javascript-codemods/post/index.ts ${js}`,
   )
 
-  await ctx.exec('yarn generate tsc')
+  await ctx.exec('bun generate tsc')
   await ctx.fs.copyFile('./src/global.d.ts', './dist/types/global.d.ts')
   await ctx.fs.copyFile('./src/types.ts', './dist/types/types.d.ts')
 
   if (ctx.options.runTests) {
-    await ctx.exec('yarn test run -c')
+    await ctx.exec('bun test run -c')
   }
 })
 
@@ -53,8 +53,8 @@ task<DevOptions>('dev', async ctx => {
   }
 
   await ctx.exec([
-    `yarn transform all -r -n ${ctx.options.namespace}`,
-    'yarn rollup -c rollup.config.js --bundleConfigAsCjs',
+    `bun transform all -r -n ${ctx.options.namespace}`,
+    'bun rollup -c rollup.config.js --bundleConfigAsCjs',
   ])
 
   const files = await globby(`dist/*.js`)
@@ -64,11 +64,11 @@ task<DevOptions>('dev', async ctx => {
     `node node_modules/.bin/jscodeshift --run-in-band -t tools/javascript-codemods/post/index.ts ${js}`,
   )
 
-  await ctx.exec('yarn generate tsc')
+  await ctx.exec('bun generate tsc')
 
   if (ctx.options.test) {
     await ctx.exec(
-      `yarn test run -n ${ctx.options.namespace} -f ${ctx.options.test}`,
+      `bun test run -n ${ctx.options.namespace} -f ${ctx.options.test}`,
     )
   }
 })

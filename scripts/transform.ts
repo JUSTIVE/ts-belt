@@ -24,8 +24,8 @@ task<Options>('typescript', async ctx => {
   const ts = files.join(' ')
 
   if (ctx.options.rebuild) {
-    await ctx.exec('yarn re:clean')
-    await ctx.exec('yarn re:build')
+    await ctx.exec('bun re:clean')
+    await ctx.exec('bun re:build')
   }
 
   await ctx.exec(
@@ -36,7 +36,7 @@ task<Options>('typescript', async ctx => {
     ? `src/${ctx.options.namespace}/index.ts`
     : 'src/**/index.ts'
 
-  await ctx.exec(`yarn prettier --write ${prettier}`)
+  await ctx.exec(`bun prettier --write ${prettier}`)
 })
 
 desc('Transform *.bs.js files')
@@ -51,8 +51,8 @@ task<Options>('javascript', async ctx => {
   const bs = files.join(' ')
 
   if (ctx.options.rebuild) {
-    await ctx.exec('yarn re:clean')
-    await ctx.exec('yarn re:build')
+    await ctx.exec('bun re:clean')
+    await ctx.exec('bun re:build')
   }
 
   await ctx.exec(
@@ -65,8 +65,8 @@ option('-r, --rebuild', 'rebuild rescript files')
 option('-n, --namespace <name>', 'select a single namespace file')
 task<Options>('all', async ctx => {
   if (ctx.options.rebuild) {
-    await ctx.exec('yarn re:clean')
-    await ctx.exec('yarn re:build')
+    await ctx.exec('bun re:clean')
+    await ctx.exec('bun re:build')
   }
 
   const commands = ['typescript', 'javascript'].map(command => {

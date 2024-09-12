@@ -1,7 +1,6 @@
 import { task, desc, option, setGlobalOptions } from 'foy'
 
 import * as globby from 'globby'
-import * as path from 'path'
 
 setGlobalOptions({
   strict: true,
@@ -17,8 +16,6 @@ type TSCOptions = {
   readonly cjs: boolean
 }
 
-const defaultEncoding = { encoding: 'utf8' } as const
-
 desc('Generate docs')
 option('-r, --rebuild', 'rebuild rescript files')
 task<Options>('docs', async ctx => {
@@ -28,7 +25,7 @@ task<Options>('docs', async ctx => {
   ctx.fs.mkdirp('docs/api/generated')
 
   if (ctx.options.rebuild) {
-    await ctx.exec('yarn transform typescript -r')
+    await ctx.exec('bun transform typescript -r')
   }
 
   await ctx.exec(
@@ -38,12 +35,12 @@ task<Options>('docs', async ctx => {
 
 desc('Generate contributors in README.md')
 task('contributors', async ctx => {
-  await ctx.exec('yarn all-contributors generate')
+  await ctx.exec('bun all-contributors generate')
 })
 
 desc('Generate tsc')
 task<TSCOptions>('tsc', async ctx => {
   await ctx.exec(
-    'yarn tsc --outDir ./dist/types --project ./tsconfig.build.json',
+    'bun tsc --outDir ./dist/types --project ./tsconfig.build.json',
   )
 })

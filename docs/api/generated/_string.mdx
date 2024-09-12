@@ -44,8 +44,8 @@ Returns `Some(value)`, where `value` is a string consisting of the character at 
 
 
 ```ts
-function get(str: string, n: number): Option<string>
-function get(n: number): (str: string) => Option<string>
+function get(str: string, n: number): undefined | string
+function get(n: number): (str: string) => undefined | string
 ```
 
 ```ts
@@ -74,7 +74,7 @@ Returns `Some(value)` where `value` is the first character of the string, or `No
 
 
 ```ts
-function head(str: string): Option<string>
+function head(str: string): undefined | string
 ```
 
 ```ts
@@ -102,8 +102,8 @@ Returns `Some(index)`, where `index` is the starting position of the first occur
 
 
 ```ts
-function indexOf(searchValue: string): (str: string) => Option<number>
-function indexOf(str: string, searchValue: string): Option<number>
+function indexOf(searchValue: string): (str: string) => undefined | number
+function indexOf(str: string, searchValue: string): undefined | number
 ```
 
 ```ts
@@ -147,7 +147,7 @@ Returns `Some(value)` where `value` is the last character of the string, or `Non
 
 
 ```ts
-function last(str: string): Option<string>
+function last(str: string): undefined | string
 ```
 
 ```ts
@@ -160,8 +160,8 @@ Returns `Some(index)`, where `index` is the starting position of the last occurr
 
 
 ```ts
-function lastIndexOf(searchValue: string): (str: string) => Option<number>
-function lastIndexOf(str: string, searchValue: string): Option<number>
+function lastIndexOf(searchValue: string): (str: string) => undefined | number
+function lastIndexOf(str: string, searchValue: string): undefined | number
 ```
 
 ```ts
@@ -206,8 +206,8 @@ Matches the given string against the provided regular expression, ir returns `No
 
 
 ```ts
-function match(str: string, regex: RegExp): Option<Array<Option<string>>>
-function match(regex: RegExp): (str: string) => Option<Array<Option<string>>>
+function match(str: string, regex: RegExp): undefined | Array<undefined | string>
+function match(regex: RegExp): (str: string) => undefined | Array<undefined | string>
 ```
 
 ### prepend
@@ -301,8 +301,8 @@ Returns `Some(index)`, where `index` is the starting position of the first match
 
 
 ```ts
-function search(str: string, regex: RegExp): Option<number>
-function search(regex: RegExp): (str: string) => Option<number>
+function search(str: string, regex: RegExp): undefined | number
+function search(regex: RegExp): (str: string) => undefined | number
 ```
 
 ### slice
@@ -351,8 +351,8 @@ Splits the given string at every occurrence of `regex` and returns an array of t
 
 
 ```ts
-function splitByRe(str: string, regex: RegExp): Array<Option<string>>
-function splitByRe(regex: RegExp): (str: string) => Array<Option<string>>
+function splitByRe(str: string, regex: RegExp): Array<undefined | string>
+function splitByRe(regex: RegExp): (str: string) => Array<undefined | string>
 ```
 
 ### startsWith
