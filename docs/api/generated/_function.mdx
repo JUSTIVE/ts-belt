@@ -322,17 +322,17 @@ type User = {
 readonly prop: string
 }
 
-F.tryCatch('{"name": "Joe"}', JSON.parse) // → Ok({ name: "Joe" })
+F.tryCatch('{"name": "Joe"}', JSON.parse) // → Ok({ name: 'Joe' })
 
-F.tryCatch("<>", JSON.parse) // → R.Error(new Error("Unexpected token < in JSON at position 0"))
+F.tryCatch('<>', JSON.parse) // → R.Error(new Error(`Unexpected token '<', "<>" is not valid JSON`))
 pipe(
     '{"name": "Joe"}',
     F.tryCatch<string, User>(JSON.parse),
-    R.map((user) => user.name),
-    R.getWithDefault("oops"),
-) // → "Joe"
+    R.map(user => user.name),
+    R.getWithDefault('oops'),
+) // → 'Joe'
 
-pipe("<>", F.tryCatch(JSON.parse), R.toOption, O.getWithDefault("oops")) // → "oops"
+pipe('<>', F.tryCatch(JSON.parse), R.toOption, O.getWithDefault('oops')) // → 'oops'
 ```
 
 ### unless

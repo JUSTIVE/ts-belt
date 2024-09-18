@@ -1,18 +1,18 @@
-import commonjs from "@rollup/plugin-commonjs";
-import resolve from "@rollup/plugin-node-resolve";
-import { terser } from "rollup-plugin-terser";
+import commonjs from '@rollup/plugin-commonjs'
+import resolve from '@rollup/plugin-node-resolve'
+import { terser } from 'rollup-plugin-terser'
 
 const plugins = [
 	resolve({
-		extensions: [".mjs", ".js", ".ts"],
-		mainFields: ["module", "jsnext", "main"],
+		extensions: ['.mjs', '.js', '.ts'],
+		mainFields: ['module', 'jsnext', 'main'],
 		preferBuiltins: false,
 		browser: true,
 	}),
 	commonjs({
 		ignoreGlobal: true,
 		include: /\/node_modules\//,
-		extensions: [".mjs", ".js", ".ts"],
+		extensions: ['.mjs', '.js', '.ts'],
 	}),
 	terser({
 		warnings: true,
@@ -42,49 +42,49 @@ const plugins = [
 			indent_level: 2,
 		},
 	}),
-];
+]
 
-const output = (format) => {
-	const extension = format === "esm" ? ".mjs" : ".js";
+const output = format => {
+	const extension = format === 'esm' ? '.mjs' : '.js'
 	return {
-		chunkFileNames: "[name]-[hash]" + extension,
-		entryFileNames: "[name]" + extension,
-		dir: "./dist",
-		exports: "named",
+		chunkFileNames: '[name]-[hash]' + extension,
+		entryFileNames: '[name]' + extension,
+		dir: './dist',
+		exports: 'named',
 		sourcemap: false,
 		indent: false,
 		freeze: false,
 		strict: false,
 		format,
-		esModule: format !== "esm",
-		externalLiveBindings: format !== "esm",
+		esModule: format !== 'esm',
+		externalLiveBindings: format !== 'esm',
 		generatedCode: {
-			preset: "es5",
+			preset: 'es5',
 			reservedNamesAsProps: false,
 			objectShorthand: false,
 			constBindings: false,
 		},
-	};
-};
+	}
+}
 
 const config = {
 	input: {
-		index: "./src/index.js",
-		pipe: "./src/pipe.js",
-		flow: "./src/flow.js",
-		Array: "./src/Array/index.js",
-		AsyncData: "./src/AsyncData/index.js",
-		AsyncDataResult: "./src/AsyncDataResult/index.js",
-		AsyncOption: "./src/AsyncOption/index.js",
-		AsyncResult: "./src/AsyncResult/index.js",
-		Bool: "./src/Bool/index.js",
-		Dict: "./src/Dict/index.js",
-		Function: "./src/Function/index.js",
-		Guards: "./src/Guards/index.js",
-		Number: "./src/Number/index.js",
-		Option: "./src/Option/index.js",
-		Result: "./src/Result/index.js",
-		String: "./src/String/index.js",
+		index: './src/index.js',
+		pipe: './src/pipe.js',
+		flow: './src/flow.js',
+		Array: './src/Array/index.js',
+		AsyncData: './src/AsyncData/index.js',
+		AsyncDataResult: './src/AsyncDataResult/index.js',
+		AsyncOption: './src/AsyncOption/index.js',
+		AsyncResult: './src/AsyncResult/index.js',
+		Bool: './src/Bool/index.js',
+		Dict: './src/Dict/index.js',
+		Function: './src/Function/index.js',
+		Guards: './src/Guards/index.js',
+		Number: './src/Number/index.js',
+		Option: './src/Option/index.js',
+		Result: './src/Result/index.js',
+		String: './src/String/index.js',
 	},
 	onwarn: () => {},
 	external: () => false,
@@ -94,7 +94,7 @@ const config = {
 		tryCatchDeoptimization: false,
 		moduleSideEffects: false,
 	},
-	output: [output("esm"), output("cjs")],
-};
+	output: [output('esm'), output('cjs')],
+}
 
-export default config;
+export default config
