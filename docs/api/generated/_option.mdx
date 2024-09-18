@@ -378,15 +378,15 @@ Returns `value` if `option` is `Some(value)`, otherwise, returns `null`.
 
 
 ```ts
-function toNullable<A>(option: Option<A>): A | null
+function toNullable<A>(option: Option<A>): NonNullable<A> | null
 ```
 
 ```ts
 pipe(
-    O.fromNullable(["hello", "world"]),
+    O.fromNullable(['hello', 'world']),
     O.flatMap(A.takeExactly(2)),
     O.toNullable,
-) // → ["hello", "world"]
+) // → ['hello', 'world']
 
 pipe(O.fromNullable([]), O.flatMap(A.takeExactly(2)), O.toNullable) // → null
 ```

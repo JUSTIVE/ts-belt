@@ -24,7 +24,11 @@
 	},
 	"javascript": {
 		"formatter": {
-			"quoteStyle": "double"
+			"quoteStyle": "single",
+			"semicolons": "asNeeded",
+			"trailingCommas": "all",
+			"arrowParentheses": "asNeeded",
+			"lineWidth": 80
 		},
 		"linter": {
 			"enabled": true

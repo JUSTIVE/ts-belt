@@ -134,9 +134,11 @@ const parseJSON = <T>(value: string) => () => JSON.parse(value) as T
 const okJSON = `{"name": "John"}`
 const badJSON = `{name": John}`
 
-R.fromExecution(parseJSON<User>(okJSON)) // → Ok({ name: "John" })
+R.fromExecution(parseJSON<User>(okJSON)) // → Ok({ name: 'John' })
 
-R.fromExecution(parseJSON<User>(badJSON)) // → Error(new SyntaxError("Unexpected token n in JSON at position 1"))
+R.fromExecution(parseJSON<User>(badJSON)) // → Error(
+    new SyntaxError(`Expected property name or '}' in JSON at position 1`),
+)
 ```
 
 ### fromFalsy
