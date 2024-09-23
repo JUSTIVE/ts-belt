@@ -1,13 +1,13 @@
 export function flow() {
-	const fns = arguments;
+	let fns = arguments
 
-	return () => {
-		let x = fns[0].apply(null, arguments);
+	return function () {
+		let x = fns[0].apply(null, arguments)
 
 		for (let i = 1, l = fns.length; i < l; i++) {
-			x = fns[i](x);
+			x = fns[i](x)
 		}
 
-		return x;
-	};
+		return x
+	}
 }

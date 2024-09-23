@@ -139,12 +139,12 @@ function fromPredicate<A>(predicateFn: (value: NonNullable<A>) => boolean): (val
 ```ts
 O.fromPredicate(
     [1, 2, 3],
-    A.some((x) => x === 2),
+    A.some(x => x === 2),
 ) // → Some([1, 2, 3])
 
 O.fromPredicate(
     [1, 2, 3],
-    A.some((x) => x === 4),
+    A.some(x => x === 4),
 ) // → None
 ```
 
@@ -363,13 +363,29 @@ function tap<A>(someFn: (value: A) => void): (option: Option<A>) => Option<A>
 
 ```ts
 pipe(
-    O.fromNullable(["hello", "world"]),
-    O.flatMap(A.get(1)),
-    O.tap((str) => {
-        console.log(str); // ⬅️ 'world'
+    O.tap(O.flatMap(O.fromNullable(['hello', 'world']), A.get(1)), str => {
+        console.log(str) // ⬅️ 'world'
     }),
-    O.getWithDefault(""),
-) // → "world"
+    O.getWithDefault(''),
+) // → 'world'
+
+pipe(
+    O.fromNullable(['hello', 'world']),
+    O.flatMap(A.get(1)),
+    O.tap(str => {
+        console.log(str) // ⬅️ 'world'
+    }),
+    O.getWithDefault(''),
+) // → 'world'
+
+pipe(
+    O.fromNullable(['hello', 'world']),
+    O.flatMap(A.get(1)),
+    O.tap(str => {
+        console.log(str) // ⬅️ 'world'
+    }),
+    O.getWithDefault(''),
+) // → 'world'
 ```
 
 ### toNullable
@@ -403,16 +419,16 @@ function toResult<A, B>(errorValue: B): (option: Option<A>) => Result<A, B>
 
 ```ts
 pipe(
-    O.fromNullable(["hello", "world"]),
+    O.fromNullable(['hello', 'world']),
     O.flatMap(A.takeExactly(2)),
-    O.toResult("oops!"),
-) // → R.Ok(["hello", "world"])
+    O.toResult('oops!'),
+) // → R.Ok(['hello', 'world'])
 
 pipe(
     O.fromNullable([]),
     O.flatMap(A.takeExactly(2)),
-    O.toResult("oops!"),
-) // → R.Error("oops!")
+    O.toResult('oops!'),
+) // → R.Error('oops!')
 ```
 
 ### toUndefined

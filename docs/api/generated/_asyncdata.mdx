@@ -105,6 +105,13 @@ Checks if the provided `AsyncData` value is `Init`.
 function isInit<A>(data: AsyncData<A>): data is Init
 ```
 
+```ts
+AD.isInit(AD.Init) // → true
+pipe(AD.Init, AD.isInit) // → true
+AD.isInit(AD.Reloading('hello world')) // → false
+pipe(AD.Complete('hello world'), AD.isInit) // → false
+```
+
 ### isLoading
 
 Checks if the provided `AsyncData` value is `Loading`.
@@ -144,6 +151,10 @@ function makeComplete<T>(value: T): AsyncData<T>
 
 ```ts
 function makeInit<T>(): AsyncData<T>
+```
+
+```ts
+AD.makeInit<number>() // → AD.Init
 ```
 
 ### makeLoading

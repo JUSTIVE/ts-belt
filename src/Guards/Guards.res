@@ -1,3 +1,4 @@
+@gentype
 let is = (value, type_) => Js.typeof(value) === type_
 
 @gentype

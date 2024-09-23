@@ -1,57 +1,66 @@
-import { expectType } from "ts-expect";
-import { A, O, R, pipe } from "../..";
+import { expectType } from 'ts-expect'
+import { A, O, R, pipe } from '../..'
 
-describe("toResult", () => {
-	it("provides correct types", () => {
-		const value = null as unknown as string | null;
-		const option = O.fromNullable(value);
+describe('toResult', () => {
+	it('provides correct types', () => {
+		const value = null as unknown as string | null
+		const option = O.fromNullable(value)
 
-		expectType<R.Result<string, string>>(O.toResult(option, "error"));
-		expectType<R.Result<string, string>>(O.toResult(O.Some("hello"), "error"));
-		expectType<R.Result<unknown, string>>(O.toResult(O.None, "error"));
-	});
+		expectType<R.Result<string, string>>(O.toResult(option, 'error'))
+		expectType<R.Result<string, string>>(O.toResult(O.Some('hello'), 'error'))
+		expectType<R.Result<unknown, string>>(O.toResult(O.None, 'error'))
+	})
 
-	it("returns Error", () => {
-		expect(pipe(O.fromNullable(null), O.toResult("this is bad"))).toEqual(
-			R.Error("this is bad"),
-		);
+	it('returns Error', () => {
+		expect(pipe(O.fromNullable(null), O.toResult('this is bad'))).toEqual(
+			R.Error('this is bad'),
+		)
 		expect(
 			pipe(
 				O.fromNullable({ prop: null }),
-				O.mapNullable((obj) => obj.prop),
-				O.toResult("this is bad"),
+				O.mapNullable(obj => obj.prop),
+				O.toResult('this is bad'),
 			),
-		).toEqual(R.Error("this is bad"));
-	});
+		).toEqual(R.Error('this is bad'))
+	})
 
-	it("returns Ok", () => {
-		expect(pipe(O.fromNullable("value"), O.toResult("this is bad"))).toEqual(
-			R.Ok("value"),
-		);
+	it('returns Ok', () => {
+		expect(pipe(O.fromNullable('value'), O.toResult('this is bad'))).toEqual(
+			R.Ok('value'),
+		)
 		expect(
 			pipe(
-				O.fromNullable({ prop: "value" }),
-				O.mapNullable((obj) => obj.prop),
-				O.toResult("this is bad"),
+				O.fromNullable({ prop: 'value' }),
+				O.mapNullable(obj => obj.prop),
+				O.toResult('this is bad'),
 			),
-		).toEqual(R.Ok("value"));
-	});
+		).toEqual(R.Ok('value'))
+	})
 
-	it("*", () => {
+	it('degrade nested option', () => {
+		expect(
+			pipe(O.Some({ BS_PRIVATE_NESTED_SOME_NONE: 0 }), O.toResult('err')),
+		).toEqual(R.Ok(O.None))
+		expect(
+			pipe(O.Some({ BS_PRIVATE_NESTED_SOME_NONE: 1 }), O.toResult('err')),
+		).toEqual(R.Ok({ BS_PRIVATE_NESTED_SOME_NONE: 0 }))
+	})
+
+	it('*', () => {
 		expect(
 			pipe(
-				O.fromNullable(["hello", "world"]),
+				O.fromNullable(['hello', 'world']),
 				O.flatMap(A.takeExactly(2)),
-				O.toResult("oops!"),
+				O.toResult('oops!'),
 			),
-		).toEqual(R.Ok(["hello", "world"]));
+		).toEqual(R.Ok(['hello', 'world']))
 
 		expect(
 			pipe(
 				O.fromNullable([]),
 				O.flatMap(A.takeExactly(2)),
-				O.toResult("oops!"),
+				O.toResult('oops!'),
 			),
-		).toEqual(R.Error("oops!"));
-	});
-});
+		).toEqual(R.Error('oops!'))
+	})
+})

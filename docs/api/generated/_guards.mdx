@@ -70,9 +70,10 @@ function isNot<A>(predicateFn: (value: A) => any): (value: A) => boolean
 
 ```ts
 // ⬇️ const isNotString = G.isNot(G.isString)
-isNotString(0) // → true
+G.isNot(0, G.isString) // → true
 
-pipe("ts-belt", G.isNot(G.isString)) // → false
+pipe('ts-belt', G.isNot(G.isString)) // → false
+pipe(3, G.isNot(G.isString)) // → true
 ```
 
 ### isNotNullable
