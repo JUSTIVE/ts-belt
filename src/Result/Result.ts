@@ -62,15 +62,22 @@ export declare function getWithDefault<A, B>(
 ): A;
 export declare function getExn<A, B>(result: Result<A, B>): A | never;
 export declare function match<A, B, R>(
-	result: Result<A, B>,
-	okFn: (value: A) => R,
-	errorFn: (value: B) => R,
-): R;
-export declare function toNullable<A, B>(result: Result<A, B>): A | null;
-export declare function toOption<A, B>(result: Result<A, B>): Option<A>;
-export declare function toUndefined<A, B>(result: Result<A, B>): A | undefined;
-export declare function isOk<A, B>(result: Result<A, B>): result is Ok<A>;
-export declare function isError<A, B>(result: Result<A, B>): result is Error<B>;
+  result: Result<A, B>,
+  okFn: (value: A) => R,
+  errorFn: (value: B) => R,
+): R
+
+export declare function bimap<A,B,C,D>(
+  result: Result<A, B>,
+  okFn: (value: A) => C,
+  errorFn: (value: B) => D
+): C | D 
+
+export declare function toNullable<A, B>(result: Result<A, B>): A | null
+export declare function toOption<A, B>(result: Result<A, B>): Option<A>
+export declare function toUndefined<A, B>(result: Result<A, B>): A | undefined
+export declare function isOk<A, B>(result: Result<A, B>): result is Ok<A>
+export declare function isError<A, B>(result: Result<A, B>): result is Error<B>
 export declare function tap<A, B>(
 	result: Result<A, B>,
 	okFn: (value: A) => void,
