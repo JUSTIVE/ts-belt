@@ -202,15 +202,25 @@ export declare function lastIndexOf(
 
 /** Returns `true` if the given string ends with `substr`. */
 
-export declare function endsWith(substr: string): (str: string) => boolean
+export declare function endsWith<A extends string>(
+	str: string,
+	substr: A,
+): str is `${string}${A}`
 
-export declare function endsWith(str: string, substr: string): boolean
+export declare function endsWith<A extends string>(
+	substr: A,
+): (str: string) => str is `${string}${A}`
 
 /** Returns `true` if the given string starts with `substr`. */
 
-export declare function startsWith(substr: string): (str: string) => boolean
+export declare function startsWith<A extends string>(
+	str: string,
+	substr: A,
+): str is `${A}${string}`
 
-export declare function startsWith(str: string, substr: string): boolean
+export declare function startsWith<A extends string>(
+	substr: A,
+): (str: string) => str is `${A}${string}`
 
 /** Returns `value`, where `value` is a string consisting of the character at location `n` in the string, or `undefined` if the `n` is out of range. */
 

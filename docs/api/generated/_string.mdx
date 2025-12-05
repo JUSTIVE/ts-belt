@@ -29,13 +29,13 @@ Returns `true` if the given string ends with `substr`.
 
 
 ```ts
-function endsWith(substr: string): (str: string) => boolean
-function endsWith(str: string, substr: string): boolean
+function endsWith<A extends string>(str: string, substr: A): str is `${string}${A}`
+function endsWith<A extends string>(substr: A): (str: string) => str is `${string}${A}`
 ```
 
 ```ts
-S.endsWith("hello", "o") // → true
-pipe("ts-belt", S.endsWith("o")) // → false
+S.endsWith('hello', 'o') // → true
+pipe('ts-belt', S.endsWith('o')) // → false
 ```
 
 ### get
@@ -361,13 +361,13 @@ Returns `true` if the given string starts with `substr`.
 
 
 ```ts
-function startsWith(substr: string): (str: string) => boolean
-function startsWith(str: string, substr: string): boolean
+function startsWith<A extends string>(str: string, substr: A): str is `${A}${string}`
+function startsWith<A extends string>(substr: A): (str: string) => str is `${A}${string}`
 ```
 
 ```ts
-S.startsWith("hello", "o") // → false
-pipe("ts-belt", S.startsWith("ts")) // → true
+S.startsWith('hello', 'o') // → false
+pipe('ts-belt', S.startsWith('ts')) // → true
 ```
 
 ### toArray
